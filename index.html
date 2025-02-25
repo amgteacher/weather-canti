@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aplicación del Clima</title>
+  <!-- Vinculamos el archivo CSS para estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Aplicación del Clima</h1>
+    
+    <!-- Campo de entrada para la localidad -->
+    <input type="text" id="cityInput" placeholder="Introduce una localidad (ej. Las Rozas)">
+    
+    <!-- Botones para las distintas acciones -->
+    <div class="buttons">
+      <button onclick="getCurrentWeather()">Tiempo Actual</button>
+      <button onclick="get15DaysForecast()">Pronóstico 15 Días</button>
+      <button onclick="showMap()">Ver Mapa</button>
+      <button onclick="getHistory()">Historial</button>
+    </div>
+
+    <!-- Div donde se mostrarán los resultados -->
+    <div id="result"></div>
+  </div>
+  
+  <!-- Vinculamos el archivo JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
