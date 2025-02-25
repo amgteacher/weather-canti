@@ -47,17 +47,20 @@ app.post("/api/search", (req, res) => {
   const { search_type, city, result } = req.body;
   // Obtenemos la IP del cliente. En entornos reales podría estar detrás de un proxy.
   const ip = req.ip || req.connection.remoteAddress;
-  
+
   // Insertamos el registro en la tabla "searches"
   const sql = `INSERT INTO searches (ip, city, search_type, result) VALUES (?, ?, ?, ?)`;
   const params = [ip, city, search_type, result];
-  
-  db.run(sql, params, function(err) {
+
+  db.run(sql, params, function (err) {
     if (err) {
       console.error("Error al insertar la búsqueda:", err.message);
       res.status(500).json({ error: err.message });
     } else {
-      res.json({ message: "Búsqueda guardada correctamente.", id: this.lastID });
+      res.json({
+        message: "Búsqueda guardada correctamente.",
+        id: this.lastID,
+      });
     }
   });
 });
@@ -65,7 +68,7 @@ app.post("/api/search", (req, res) => {
 // Endpoint para obtener el historial de búsquedas para la IP del usuario
 app.get("/api/history", (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;
-  
+
   // Se consultan los registros de búsquedas para la IP solicitante, ordenados por fecha descendente
   const sql = `SELECT * FROM searches WHERE ip = ? ORDER BY timestamp DESC`;
   db.all(sql, [ip], (err, rows) => {
